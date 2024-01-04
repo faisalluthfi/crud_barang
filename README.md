@@ -14,6 +14,7 @@
 - run php artisan generate:key
 - run php arisan migrate:refresh --seed
 - run php artisan serve
+- login with **email** : admin@gmail.com **password** : admin12345
 
 ## About Laravel
 
