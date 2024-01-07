@@ -18,13 +18,11 @@ class BarangController extends Controller
     {
         //
         $barang = Barang::get();
-        
+
         $title = 'Hapus Barang!';
         $text = "Apakah Anda Yakin ?";
         confirmDelete($title, $text);
-        return view('barang.index',['barang' => $barang]);
-       
-
+        return view('barang.index', ['barang' => $barang]);
     }
 
     /**
@@ -53,7 +51,7 @@ class BarangController extends Controller
             "kode_barang" => 'required|max:20',
             "nama_barang" => 'required|min:3|max:255|unique:barang',
             "kategori_barang" => 'required',
-            "harga"=> 'required',
+            "harga" => 'required',
             "jumlah" => 'required'
         ]);
 
@@ -62,7 +60,6 @@ class BarangController extends Controller
 
 
         return redirect()->route('barang');
-        
     }
 
     /**
@@ -87,8 +84,7 @@ class BarangController extends Controller
         //
         $barang = Barang::find($id);
 
-        return view('barang.edit',['barang'=>$barang]);
-
+        return view('barang.edit', ['barang' => $barang]);
     }
 
     /**
@@ -98,18 +94,18 @@ class BarangController extends Controller
      * @param  \App\Models\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id, Barang $barang)
+    public function update(Request $request, $id, Barang $barang)
     {
         $barang = Barang::find($id);
         $barang->update([
-            "kode_barang"=>$request->kode_barang,
-            "nama_barang"=>$request->nama_barang,
-            "kategori_barang"=>$request->kategori_barang,
-            "harga"=>$request->harga,
-            "jumlah"=>$request->jumlah,
+            "kode_barang" => $request->kode_barang,
+            "nama_barang" => $request->nama_barang,
+            "kategori_barang" => $request->kategori_barang,
+            "harga" => $request->harga,
+            "jumlah" => $request->jumlah,
         ]);
 
-        return redirect()->route('barang')->with('success','Data Berhasil di Edit');
+        return redirect()->route('barang')->with('success', 'Data Berhasil di Edit');
     }
 
     /**
@@ -121,11 +117,8 @@ class BarangController extends Controller
     public function destroy($id)
     {
         //
-      
+
         Barang::destroy($id);
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-        return redirect()->route('barang')->with('success','Data Berhasil di Hapus');
+        return redirect()->route('barang')->with('success', 'Data Berhasil di Hapus');
     }
 }

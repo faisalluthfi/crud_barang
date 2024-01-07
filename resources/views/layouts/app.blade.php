@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>SB Admin 2 - Dashboard</title>
 
@@ -16,9 +17,16 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> --}}
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
 
 </head>
 
@@ -28,9 +36,9 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
- 
+
         <!-- Sidebar -->
-       @include('layouts.sidebar')
+        @include('layouts.sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -52,8 +60,8 @@
                     </div>
 
                     <!-- Content Row -->
-                    @yield("content")
-                    
+                    @yield('content')
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -113,8 +121,66 @@
     <!-- Page level plugins -->
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
 
-    <!-- Page level custom scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
+    <!-- Page level custom scripts -->
+    <script>
+        function Toggle() {
+            let temp = document.getElementById("password");
+
+            if (temp.type === "password") {
+                temp.type = "text";
+            } else {
+                temp.type = "password";
+            }
+        }
+
+        function ToggleConfirm() {
+            let temp = document.getElementById("password_confirmation");
+
+            if (temp.type === "password") {
+                temp.type = "text";
+            } else {
+                temp.type = "password";
+            }
+        }
+
+        document.getElementById("password").addEventListener("input", function() {
+            var inputElement = this; // Mengambil elemen input yang memicu event
+            var inputValue = inputElement.value;
+
+            // Menghapus spasi menggun  akan regex
+            var newValue = inputValue.replace(/\s/g, '');
+
+            // Menetapkan nilai baru ke input
+            inputElement.value = newValue;
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('#cari').on('keyup', function() {
+            $value = $(this).val();
+            // alert($value)
+            $.ajax({
+                type: 'get',
+                url: '{{ URL::to('cari') }}',
+                data: {
+                    'cari': $value
+                },
+                success: function(data) {
+                    $('tbody').html(data);
+                }
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'csrftoken': '{{ csrf_token() }}'
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -12,7 +12,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{\Route::is('dashboard') ? 'active' : ''}}">
+    <li class="nav-item {{ \Route::is('dashboard') ? 'active' : '' }}">
         <a class="nav-link " href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
@@ -26,13 +26,13 @@
     </li>
 
     {{-- user --}}
-    {{-- <li class="nav-item {{ \Route::is('user') ? 'active' : '' }}">
+    <li class="nav-item {{ \Route::is('user') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('user') }}">
             <i class="fas fa-fw fa-user"></i>
-            <span>Kategori Barang</span></a>
-    </li> --}}
+            <span>Management User</span></a>
+    </li>
 
-   
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -44,8 +44,9 @@
 
     <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="{{ asset("img/undraw_rocket.svg") }}" alt="...">
-    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+        <img class="sidebar-card-illustration mb-2" src="{{ asset('img/undraw_rocket.svg') }}" alt="...">
+        <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!
+        </p>
         <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
     </div>
 
